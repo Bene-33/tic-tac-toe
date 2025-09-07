@@ -1,3 +1,7 @@
+function createPlayer (){
+
+};
+
 function Gameboard () {
 
     const rows = 3; 
@@ -7,40 +11,21 @@ function Gameboard () {
     for (let r = 0; r < rows; r++) {
         board[r] = [];
         for (let c = 0; c < columns; c++){
-            board[r].push(cell().setMarker("X"));
+            board[r].push(" ");
         };
     };
 
-    return {board}
+
+    function markCell (){
+        //identify empty Cells
+    };
+
+    return {board, markCell}
     
 };
 
-function cell() {
-    let value = " ";
-    const setMarker = (player) => {
-        value = player;
-    };
-    const getCurrentMarker = () => value;
-    return {setMarker, getCurrentMarker};
-};
-
-
-
-
-
-function createPlayer (name, symbol) {
-    return {
-        playerName: name, 
-        playerSymbol: symbol,
-    };
-};
-
-function gameController() {
-
-};
-
-
-const currentCell = cell();
- console.log(currentCell.setMarker("X"))
-
 console.log(Gameboard().board);
+
+function gameController (){
+
+};
