@@ -18,6 +18,7 @@ function gameboard () {
         };
     };
 
+    const setBoard = () => board;
 
     function markCell (row, column, symbol){
         const availableCell = () => {
@@ -28,38 +29,47 @@ function gameboard () {
                 return false
             };
         };
-        
         if(availableCell()){
             board[row][column].addMarker(symbol);
         };
     };
+
     const printBoard = () => {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues)
     };
+    function checkWinCondition(board) {
+        return true
+    
+    };
+
+    const printWinCondition = () => {
+        if(checkWinCondition){
+            console.log("yes")
+        };
+    };
 
     return {
-        board, 
+        setBoard, 
         markCell,
-        printBoard}
+        printBoard,
+        printWinCondition}
+        
 };
 
 function cell() {
     let value = "";
-
     const addMarker = (player) =>{
         value = player;
     };
-
     const getValue =() => value;
-
     return{
         addMarker,
         getValue
-
     };
+};
 
-}
+
 
 function gameController (){
     
@@ -67,9 +77,11 @@ function gameController (){
 
 const PlayerOne = createPlayer("Josh", "X");
 const playerTwo =createPlayer("Alan", "O");
-const game = gameboard()
+const game = gameboard();
 game.printBoard();
 game.markCell(1,1,PlayerOne.playerSymbol)
 game.printBoard();
 game.markCell(1,2,playerTwo.playerSymbol);
+
 game.printBoard();
+game.printWinCondition();
