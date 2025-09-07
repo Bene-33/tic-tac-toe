@@ -1,12 +1,3 @@
-function createPlayer (name,symbol) {
-    let playerName = name;
-    let playerSymbol = symbol;
-    return {playerName, playerSymbol};
-};
-const playerOne = createPlayer("Hubert", "X")
-const playerTwo = createPlayer("Dieter","O")
-console.log(playerOne, playerTwo)
-
 function Gameboard () {
 
     const rows = 4; 
@@ -31,27 +22,37 @@ function Gameboard () {
     return {board, markCell};
     
 };
-console.log(Gameboard().board)
-console.log(Gameboard().markCell())
 
 function cell() {
-    value = "";
-
+    value = "0";
     const setMarker = (player) => {
         value = player;
     };
-    
     const getCurrentMarker = () => value;
-
     return {setMarker, getCurrentMarker};
 };
 
-const currentCell = cell();
-currentCell.setMarker(playerOne.playerSymbol)
-console.log(currentCell.getCurrentMarker())
 
 
 
 function gameController() {
-
+    function createPlayer (name, symbol) {
+        return {
+            playerName: name, 
+            playerSymbol: symbol,
+        };
+    };
+    let playerOne = createPlayer("Hubert", "X");
+    let playerTwo = createPlayer("Dieter","O");
+    return {playerOne, playerTwo};
 };
+
+console.log(gameController().playerOne)
+console.log(gameController().playerTwo)
+
+const currentCell = cell();
+console.log(currentCell.getCurrentMarker())
+
+console.log(gameController())
+console.log(Gameboard().board);
+console.log(Gameboard().markCell())
