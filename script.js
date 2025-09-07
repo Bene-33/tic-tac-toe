@@ -65,11 +65,11 @@ function gameController (){
     
 };
 
-console.log(createPlayer("Josh", "X"));
-console.log(createPlayer("Alan", "O"));
+const PlayerOne = createPlayer("Josh", "X");
+const playerTwo =createPlayer("Alan", "O");
 const game = gameboard()
 game.printBoard();
-game.markCell(1,1,"X")
+game.markCell(1,1,PlayerOne.playerSymbol)
 game.printBoard();
-game.markCell(1,1,"O");
+game.markCell(1,2,playerTwo.playerSymbol);
 game.printBoard();
