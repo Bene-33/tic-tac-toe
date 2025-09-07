@@ -1,30 +1,22 @@
 function Gameboard () {
 
-    const rows = 4; 
-    const columns = 4; 
+    const rows = 3; 
+    const columns = 3; 
     const board = [];
 
     for (let r = 0; r < rows; r++) {
         board[r] = [];
         for (let c = 0; c < columns; c++){
-            board[r].push(cell());
+            board[r].push(cell().setMarker("X"));
         };
     };
 
-    const markCell = (row, column , playerSymbol) => {
-        const availableCell = board.filter((row) => row !== "X" || "O");
-
-        if(!availableCell) return;
-        
-        return availableCell;
-    }
-    
-    return {board, markCell};
+    return {board}
     
 };
 
 function cell() {
-    value = "0";
+    let value = " ";
     const setMarker = (player) => {
         value = player;
     };
@@ -35,24 +27,20 @@ function cell() {
 
 
 
-function gameController() {
-    function createPlayer (name, symbol) {
-        return {
-            playerName: name, 
-            playerSymbol: symbol,
-        };
+
+function createPlayer (name, symbol) {
+    return {
+        playerName: name, 
+        playerSymbol: symbol,
     };
-    let playerOne = createPlayer("Hubert", "X");
-    let playerTwo = createPlayer("Dieter","O");
-    return {playerOne, playerTwo};
 };
 
-console.log(gameController().playerOne)
-console.log(gameController().playerTwo)
+function gameController() {
+
+};
+
 
 const currentCell = cell();
-console.log(currentCell.getCurrentMarker())
+ console.log(currentCell.setMarker("X"))
 
-console.log(gameController())
 console.log(Gameboard().board);
-console.log(Gameboard().markCell())
