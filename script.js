@@ -18,7 +18,7 @@ function gameboard () {
         };
     };
 
-    const setBoard = () => board;
+    const getBoard = () => board;
 
     function markCell (row, column, symbol){
         const availableCell = () => {
@@ -31,7 +31,9 @@ function gameboard () {
         };
         if(availableCell()){
             board[row][column].addMarker(symbol);
+            return true;
         };
+        return false;
     };
 
     const printBoard = () => {
@@ -39,21 +41,48 @@ function gameboard () {
         console.log(boardWithCellValues)
     };
     function checkWinCondition(board) {
-        return true
-    
+        const winPatterns = [
+            //row
+            [[0,0] , [0,1] , [0,2]],
+            [[1,0] , [1,1] , [1,2]],
+            [[2,0] , [2,1] , [2,2]],
+            //column
+            [[0,0] , [1,0] , [2,0]],
+            [[0,1] , [1,1] , [2,1]],
+            [[0,2] , [1,2] , [2,2]],
+            //diagonaly
+            [[0,0] , [1,1] , [2,2]],
+            [[0,2] , [1,1] , [2,0]]
+        ];
+        for (const pattern of winPatterns){
+            const [a, b, c] = pattern; 
+            const cellA = board[a[0]][a[1]].getValue();
+            const cellB = board[b[0]][b[1]].getValue();
+            const cellC = board[c[0]][c[1]].getValue();
+
+            if(cellA !== "" && cellA === cellB && cellB === cellC){
+                return cellA;
+            }
+        }
+        return null;
     };
 
     const printWinCondition = () => {
-        if(checkWinCondition){
-            console.log("yes")
-        };
+        const winner = checkWinCondition(board);
+        if(winner){
+            console.log(`"The winner is" ${winner}`);
+        } 
+        else {
+            console.log("draw")
+         }
     };
 
     return {
-        setBoard, 
+        getBoard, 
         markCell,
         printBoard,
-        printWinCondition}
+        printWinCondition
+    }
         
 };
 
@@ -75,13 +104,12 @@ function gameController (){
     
 };
 
-const PlayerOne = createPlayer("Josh", "X");
+const playerOne = createPlayer("Josh", "X");
 const playerTwo =createPlayer("Alan", "O");
 const game = gameboard();
-game.printBoard();
-game.markCell(1,1,PlayerOne.playerSymbol)
-game.printBoard();
-game.markCell(1,2,playerTwo.playerSymbol);
+game.markCell(0,0,playerOne.playerSymbol);
+game.markCell(0,1,playerOne.playerSymbol);
+game.markCell(0,2,playerOne.playerSymbol);
 
 game.printBoard();
 game.printWinCondition();
