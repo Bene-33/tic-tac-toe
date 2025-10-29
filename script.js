@@ -10,6 +10,8 @@ function gameboard () {
     const rows = 3; 
     const columns = 3; 
     const board = [];
+    const maxRounds = rows*columns;
+    let roundCount = 0;
 
     for (let r = 0; r < rows; r++) {
         board[r] = [];
@@ -31,6 +33,7 @@ function gameboard () {
         };
         if(availableCell()){
             board[row][column].addMarker(symbol);
+            roundCount++;
             return true;
         };
         return false;
@@ -67,10 +70,16 @@ function gameboard () {
         return null;
     };
 
+    function checkDrawCondition(){
+        if(maxRounds === roundCount){
+            return true
+        }
+    };
     const printWinCondition = () => {
         const winner = checkWinCondition(board);
-        if(winner){
-            let winnerName ="";
+        const  draw = checkDrawCondition(board);
+        if(winner) {
+            let winnerName = "";
             if (winner === playerOne.playerSymbol){
                 winnerName = playerOne.playerName;
             }
@@ -78,9 +87,12 @@ function gameboard () {
                 winnerName = playerTwo.playerName;
             }
             console.log(`The winner is ${winnerName}`);
-        } 
+        }
+        else if (draw){
+            console.log("draw");
+        }  
         else {
-            console.log("draw")
+            return null;
          }
     };
 
@@ -112,11 +124,17 @@ function gameController (){
 };
 
 const playerOne = createPlayer("Josh", "X");
-const playerTwo =createPlayer("Alan", "O");
+const playerTwo = createPlayer("Alan", "O");
 const game = gameboard();
-game.markCell(0,2,playerTwo.playerSymbol);
+game.markCell(0,0,playerTwo.playerSymbol);
+game.markCell(0,1,playerOne.playerSymbol);
+game.markCell(0,2,playerOne.playerSymbol);
+game.markCell(1,0,playerOne.playerSymbol);
 game.markCell(1,1,playerTwo.playerSymbol);
-game.markCell(2,0,playerTwo.playerSymbol);
+game.markCell(1,2,playerTwo.playerSymbol);
+game.markCell(2,0,playerOne.playerSymbol);
+game.markCell(2,1,playerTwo.playerSymbol);
+game.markCell(2,2,playerOne.playerSymbol);
 
 game.printBoard();
 game.printWinCondition();
