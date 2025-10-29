@@ -70,7 +70,14 @@ function gameboard () {
     const printWinCondition = () => {
         const winner = checkWinCondition(board);
         if(winner){
-            console.log(`"The winner is" ${winner}`);
+            let winnerName ="";
+            if (winner === playerOne.playerSymbol){
+                winnerName = playerOne.playerName;
+            }
+            else if (winner === playerTwo.playerSymbol){
+                winnerName = playerTwo.playerName;
+            }
+            console.log(`The winner is ${winnerName}`);
         } 
         else {
             console.log("draw")
@@ -88,7 +95,7 @@ function gameboard () {
 
 function cell() {
     let value = "";
-    const addMarker = (player) =>{
+    const addMarker = (player) => {
         value = player;
     };
     const getValue =() => value;
@@ -107,9 +114,9 @@ function gameController (){
 const playerOne = createPlayer("Josh", "X");
 const playerTwo =createPlayer("Alan", "O");
 const game = gameboard();
-game.markCell(0,0,playerOne.playerSymbol);
-game.markCell(0,1,playerOne.playerSymbol);
-game.markCell(0,2,playerOne.playerSymbol);
+game.markCell(0,2,playerTwo.playerSymbol);
+game.markCell(1,1,playerTwo.playerSymbol);
+game.markCell(2,0,playerTwo.playerSymbol);
 
 game.printBoard();
 game.printWinCondition();
