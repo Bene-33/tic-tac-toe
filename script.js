@@ -6,7 +6,7 @@ function createPlayer (name, symbol) {
     return{playerName, playerSymbol};
 };
 
-function gameboard () {
+function gameboard (playerOne, playerTwo) {
 
     const rows = 3; 
     const columns = 3; 
@@ -74,7 +74,7 @@ function gameboard () {
         console.log(boardWithCellValues)
     };
 
-    function checkWinCondition(board) {
+    function checkWinCondition(getBoard) {
       
         const winPatterns = [
             //row
@@ -105,14 +105,14 @@ function gameboard () {
         return null;
     };
 
-    function checkDrawCondition() {
+    function checkDrawCondition(board) {
         if(maxRounds === roundCount){
 
             return true
         }
     };
 
-    const printWinCondition = () => {
+    const printWinCondition = (board) => {
         
         const winner = checkWinCondition(board);
         const  draw = checkDrawCondition(board);
@@ -155,7 +155,7 @@ function gameboard () {
 
 
 
-(function guiController (){
+function guiController () {
 
     const playerOne = createPlayer("Josh", "X");
     const playerTwo = createPlayer("Alan", "O");
@@ -163,18 +163,28 @@ function gameboard () {
     const gridContainer = document.getElementById("gameGrid");
     const gameBoard = game.getBoard();
 
-    gameBoard.forEach(row => { 
-        row.forEach(cell => {
+    gameBoard.forEach((row, rIndex) => { 
+        row.forEach((column, cIndex) => {
             const cellDiv = document.createElement("div");
-            cellDiv.textContent = cell.getValue();
+            cellDiv.textContent = "";
             cellDiv.classList.add("gridCell");
+            
+            cellDiv.dataset.row = rIndex;
+            cellDiv.dataset.column = cIndex;
+            const rowIndex =  Number(cellDiv.dataset.row);
+            const columnIndex = Number(cellDiv.dataset.column);
+
+            cellDiv.addEventListener("click", () => {
+                cellDiv.textContent = game.markCell(rowIndex, columnIndex, playerOne.playerSymbol)
+    
+            });
             gridContainer.appendChild(cellDiv);
         })
     });
     return{
         gridContainer
     }
-})();
+};
 
 const game = gameboard();
 // play rounds
@@ -188,5 +198,6 @@ game.markCell(2,0,playerOne.playerSymbol);
 game.markCell(2,1,playerTwo.playerSymbol);
 game.markCell(2,2,playerOne.playerSymbol);
 
+guiController();
 game.printBoard();
 game.printWinCondition();
