@@ -9,11 +9,12 @@
 .gridCell{
     margin: 2px;
     padding: 10px;
-    background-color: blueviolet;
-    color:blanchedalmond;
+    background-color: #d1d1e0;
+    color: #cc0066;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3em;
     font-weight: bold;
+    border-radius: 1rem;
 }
