@@ -1,0 +1,13 @@
+#gameGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+};
+
+.gridCell{
+    width: 5px;
+    height: 5px;
+    padding: 2px;
+    border: 1px #0000;
+    background-color: aqua;
+};

@@ -90,7 +90,7 @@ function gameboard () {
             [[0,2] , [1,1] , [2,0]]
         ];
 
-        for (const pattern of winPatterns){
+        for (const pattern of winPatterns) {
             const [a, b, c] = pattern; 
             const cellA = board[a[0]][a[1]].getValue();
             const cellB = board[b[0]][b[1]].getValue();
@@ -105,7 +105,7 @@ function gameboard () {
         return null;
     };
 
-    function checkDrawCondition(){
+    function checkDrawCondition() {
         if(maxRounds === roundCount){
 
             return true
@@ -145,7 +145,9 @@ function gameboard () {
         getBoard, 
         markCell,
         printBoard,
-        printWinCondition
+        printWinCondition,
+        rows,
+        columns,
     }
         
 };
@@ -153,15 +155,30 @@ function gameboard () {
 
 
 
-function gameController (){
-    
-};
+(function guiController (){
 
-const playerOne = createPlayer("Josh", "X");
-const playerTwo = createPlayer("Alan", "O");
+    const playerOne = createPlayer("Josh", "X");
+    const playerTwo = createPlayer("Alan", "O");
+    const game = gameboard(playerOne, playerTwo);
+    const gridContainer = document.getElementById("gameGrid");
+    const gameBoard = game.getBoard();
+
+    gameBoard.forEach(row => { 
+        row.forEach(cell => {
+            const cellDiv = document.createElement("div");
+            cellDiv.textContent = cell.getValue();
+            cellDiv.classList.add("gridCell");
+            gridContainer.appendChild(cellDiv);
+        })
+    });
+    return{
+        gridContainer
+    }
+})();
+
 const game = gameboard();
 // play rounds
-game.markCell(0,0,playerTwo.playerSymbol);
+game.markCell(0,0,playerOne.playerSymbol);
 game.markCell(0,1,playerOne.playerSymbol);
 game.markCell(0,2,playerOne.playerSymbol);
 game.markCell(1,0,playerOne.playerSymbol);
