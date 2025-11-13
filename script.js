@@ -46,6 +46,7 @@ function gameboard (playerOne, playerTwo) {
             roundCount++;
 
             return symbol;
+                   
         };
 
         return board[row][column].getValue();    
@@ -128,8 +129,7 @@ function gameboard (playerOne, playerTwo) {
             else if (winner === playerTwo.playerSymbol){
                 winnerName = playerTwo.playerName;
             }
-
-            console.log(`The winner is ${winnerName}`);
+                console.log(`The winner is ${winnerName}`);
         }
 
         else if (draw){
@@ -145,6 +145,8 @@ function gameboard (playerOne, playerTwo) {
         getBoard, 
         markCell,
         printBoard,
+        checkWinCondition,
+        checkDrawCondition,
         printWinCondition,
         rows,
         columns,
@@ -162,6 +164,7 @@ function gameboard (playerOne, playerTwo) {
     const gridContainer = document.getElementById("gameGrid");
     const gameBoard = game.getBoard();
 
+
     gameBoard.forEach((row, rIndex) => { 
         row.forEach((column, cIndex) => {
             const cellDiv = document.createElement("div");
@@ -169,12 +172,21 @@ function gameboard (playerOne, playerTwo) {
             cellDiv.classList.add("gridCell");
             gridContainer.appendChild(cellDiv);
 
+            let currentPlayer = "";
             cellDiv.addEventListener("click", () => {
-                cellDiv.textContent = game.markCell(rIndex, cIndex, playerOne.playerSymbol);
-
+                if(game.roundCount % 2 !== 0){
+                    currentPlayer = playerOne;
+                } 
+                else if (game.roundCount % 2 === 0){
+                    currentPlayer = playerTwo;
+                }
+                    cellDiv.textContent = game.markCell(rIndex, cIndex, currentPlayer.playerSymbol);
             });
         });
     });
+    return{
+
+    }
 })();
 
 // const game = gameboard();
