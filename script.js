@@ -149,13 +149,12 @@ function gameboard (playerOne, playerTwo) {
         rows,
         columns,
     }
-        
 };
 
 
 
 
-function guiController () {
+(function guiController () {
 
     const playerOne = createPlayer("Josh", "X");
     const playerTwo = createPlayer("Alan", "O");
@@ -168,36 +167,26 @@ function guiController () {
             const cellDiv = document.createElement("div");
             cellDiv.textContent = "";
             cellDiv.classList.add("gridCell");
-            
-            cellDiv.dataset.row = rIndex;
-            cellDiv.dataset.column = cIndex;
-            const rowIndex =  Number(cellDiv.dataset.row);
-            const columnIndex = Number(cellDiv.dataset.column);
+            gridContainer.appendChild(cellDiv);
 
             cellDiv.addEventListener("click", () => {
-                cellDiv.textContent = game.markCell(rowIndex, columnIndex, playerOne.playerSymbol)
-    
+                cellDiv.textContent = game.markCell(rIndex, cIndex, "x");
+
             });
-            gridContainer.appendChild(cellDiv);
-        })
+        });
     });
-    return{
-        gridContainer
-    }
-};
+})();
 
-const game = gameboard();
-// play rounds
-game.markCell(0,0,playerOne.playerSymbol);
-game.markCell(0,1,playerOne.playerSymbol);
-game.markCell(0,2,playerOne.playerSymbol);
-game.markCell(1,0,playerOne.playerSymbol);
-game.markCell(1,1,playerTwo.playerSymbol);
-game.markCell(1,2,playerTwo.playerSymbol);
-game.markCell(2,0,playerOne.playerSymbol);
-game.markCell(2,1,playerTwo.playerSymbol);
-game.markCell(2,2,playerOne.playerSymbol);
-
-guiController();
-game.printBoard();
-game.printWinCondition();
+// const game = gameboard();
+// // play rounds
+// game.markCell(0,0,playerOne.playerSymbol);
+// game.markCell(0,1,playerOne.playerSymbol);
+// game.markCell(0,2,playerOne.playerSymbol);
+// game.markCell(1,0,playerOne.playerSymbol);
+// game.markCell(1,1,playerTwo.playerSymbol);
+// game.markCell(1,2,playerTwo.playerSymbol);
+// game.markCell(2,0,playerOne.playerSymbol);
+// game.markCell(2,1,playerTwo.playerSymbol);
+// game.markCell(2,2,playerOne.playerSymbol);
+// game.printBoard();
+// game.printWinCondition();
