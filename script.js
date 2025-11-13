@@ -44,11 +44,11 @@ function gameboard (playerOne, playerTwo) {
             board[row][column].addMarker(symbol);
            
             roundCount++;
- 
-            return true;
+
+            return symbol;
         };
 
-        return false;
+        return board[row][column].getValue();    
     };
 
     function cell() {
@@ -170,7 +170,7 @@ function gameboard (playerOne, playerTwo) {
             gridContainer.appendChild(cellDiv);
 
             cellDiv.addEventListener("click", () => {
-                cellDiv.textContent = game.markCell(rIndex, cIndex, "x");
+                cellDiv.textContent = game.markCell(rIndex, cIndex, playerOne.playerSymbol);
 
             });
         });
