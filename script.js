@@ -23,6 +23,7 @@ function gameboard (playerOne, playerTwo) {
     };
 
     const getBoard = () => board;
+    const getRoundCount = () => roundCount;
 
     function markCell (row, column, symbol){
         
@@ -61,7 +62,7 @@ function gameboard (playerOne, playerTwo) {
      
         };
         
-        const getValue =() => value;
+        const getValue = () => value;
         
         return{
             addMarker,
@@ -142,7 +143,8 @@ function gameboard (playerOne, playerTwo) {
     };
 
     return {
-        getBoard, 
+        getBoard,
+        getRoundCount, 
         markCell,
         printBoard,
         checkWinCondition,
@@ -174,19 +176,16 @@ function gameboard (playerOne, playerTwo) {
 
             let currentPlayer = "";
             cellDiv.addEventListener("click", () => {
-                if(game.roundCount % 2 !== 0){
+                if(game.getRoundCount() % 2 === 0){
                     currentPlayer = playerOne;
                 } 
-                else if (game.roundCount % 2 === 0){
+                else if (game.getRoundCount() % 2 !== 0){
                     currentPlayer = playerTwo;
                 }
                     cellDiv.textContent = game.markCell(rIndex, cIndex, currentPlayer.playerSymbol);
             });
         });
     });
-    return{
-
-    }
 })();
 
 // const game = gameboard();
