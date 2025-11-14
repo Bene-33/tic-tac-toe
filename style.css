@@ -18,10 +18,10 @@
     border-radius: 1rem;
 }
 
-#playerOne{
+.gridCell#playerOne{
     color: #cc0066;
 }
 
-#playerTwo{
+.gridCell#playerTwo{
     color: #11cc00;
 }
