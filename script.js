@@ -174,10 +174,8 @@ function gameboard (playerOne, playerTwo) {
             cellDiv.classList.add("gridCell");
             gridContainer.appendChild(cellDiv);
 
-            let currentPlayer = "";
             cellDiv.addEventListener("click", () => {
-                
-                currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
+                let currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
                 
                 if (game.markCell(rIndex, cIndex, currentPlayer.playerSymbol)) {
                     cellDiv.textContent = currentPlayer.playerSymbol;
