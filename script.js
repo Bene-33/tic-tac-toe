@@ -1,8 +1,12 @@
-function createPlayer (name, symbol) {
+    let playerOne = "";
+    let playerTwo = "";
+    let game = "";
 
+function createPlayer (name, symbol) {
+    
     const playerName = name;
     const playerSymbol = symbol;
-
+    
     return{playerName, playerSymbol};
 };
 
@@ -155,46 +159,43 @@ function gameboard (playerOne, playerTwo) {
     }
 };
 
-
-
-
 (function guiController () {
 
-    let playerOne = ""
-    let playerTwo = "";
     const setPlayerNames = document.querySelector('button[type="submit"]');
-
+    const gridContainer = document.getElementById("gameGrid");
+    
+    
     setPlayerNames.addEventListener("click", () => {
         event.preventDefault();
+
         playerOne = createPlayer(document.getElementById("playerOne").value, "X");
         playerTwo = createPlayer(document.getElementById("playerTwo").value, "O");
-    });
-      
+        
+        game = gameboard(playerOne, playerTwo);
 
-
-    const game = gameboard(playerOne, playerTwo);
-    const gridContainer = document.getElementById("gameGrid");
-    const gameBoard = game.getBoard();
-
-    gameBoard.forEach((row, rIndex) => { 
-        row.forEach((column, cIndex) => {
-            const cellDiv = document.createElement("div");
-            cellDiv.textContent = "";
-            cellDiv.classList.add("gridCell");
-            gridContainer.appendChild(cellDiv);
-
-            cellDiv.addEventListener("click", () => {
-                let currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
-                
-                if (game.markCell(rIndex, cIndex, currentPlayer.playerSymbol)) {
-                    cellDiv.textContent = currentPlayer.playerSymbol;
-                    cellDiv.id = currentPlayer === playerOne ? "playerOne" : "playerTwo"; 
-                };
-                
-                if (game.checkWinCondition(gameBoard) || game.checkDrawCondition(gameBoard)) {
-                    return game.printWinCondition(gameBoard);
-                };
+        // gridContainer.innerHTML = "";
+        const gameBoard = game.getBoard();
+        gameBoard.forEach((row, rIndex) => { 
+            row.forEach((column, cIndex) => {
+                const cellDiv = document.createElement("div");
+                cellDiv.textContent = "";
+                cellDiv.classList.add("gridCell");
+                gridContainer.appendChild(cellDiv);
+    
+                cellDiv.addEventListener("click", () => {
+                    let currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
+                    
+                    if (game.markCell(rIndex, cIndex, currentPlayer.playerSymbol)) {
+                        cellDiv.textContent = currentPlayer.playerSymbol;
+                        cellDiv.id = currentPlayer === playerOne ? "playerOne" : "playerTwo"; 
+                    };
+                    
+                    if (game.checkWinCondition(gameBoard) || game.checkDrawCondition(gameBoard)) {
+                        return game.printWinCondition(gameBoard);
+                    };
+                });
             });
         });
     });
+    
 })();
