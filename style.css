@@ -1,3 +1,13 @@
+body{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e7f6fa98;
+}
+
 #gameGrid{
     display: grid;
     width: 300px;
@@ -24,4 +34,21 @@
 
 .gridCell#playerTwo{
     color: #11cc00;
+}
+
+input#playerOne{
+    color: #cc0066;
+    font-size: 1rem;
+}
+
+input#playerTwo{
+    color: #11cc00;
+    font-size: 1rem;
+}
+
+input{
+    padding: 9px;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
 }
