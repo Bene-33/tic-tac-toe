@@ -160,12 +160,21 @@ function gameboard (playerOne, playerTwo) {
 
 (function guiController () {
 
-    const playerOne = createPlayer("Josh", "X");
-    const playerTwo = createPlayer("Alan", "O");
+    let playerOne = ""
+    let playerTwo = "";
+    const setPlayerNames = document.querySelector('button[type="submit"]');
+
+    setPlayerNames.addEventListener("click", () => {
+        event.preventDefault();
+        playerOne = createPlayer(document.getElementById("playerOne").value, "X");
+        playerTwo = createPlayer(document.getElementById("playerTwo").value, "O");
+    });
+      
+
+
     const game = gameboard(playerOne, playerTwo);
     const gridContainer = document.getElementById("gameGrid");
     const gameBoard = game.getBoard();
-
 
     gameBoard.forEach((row, rIndex) => { 
         row.forEach((column, cIndex) => {
@@ -189,17 +198,3 @@ function gameboard (playerOne, playerTwo) {
         });
     });
 })();
-
-// const game = gameboard();
-// // play rounds
-// game.markCell(0,0,playerOne.playerSymbol);
-// game.markCell(0,1,playerOne.playerSymbol);
-// game.markCell(0,2,playerOne.playerSymbol);
-// game.markCell(1,0,playerOne.playerSymbol);
-// game.markCell(1,1,playerTwo.playerSymbol);
-// game.markCell(1,2,playerTwo.playerSymbol);
-// game.markCell(2,0,playerOne.playerSymbol);
-// game.markCell(2,1,playerTwo.playerSymbol);
-// game.markCell(2,2,playerOne.playerSymbol);
-// game.printBoard();
-// game.printWinCondition();
