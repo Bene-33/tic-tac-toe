@@ -17,6 +17,9 @@ function gameboard (playerOne, playerTwo) {
     const board = [];
     const maxRounds = rows*columns;
     let roundCount = 0;
+    let gameOver = false;
+
+    const isGameOver = () => gameOver;
 
     for (let r = 0; r < rows; r++) {
         board[r] = [];
@@ -124,6 +127,7 @@ function gameboard (playerOne, playerTwo) {
         const  draw = checkDrawCondition(board);
         
         if(winner) {
+            gameOver = true;
         
             let winnerName = "";
         
@@ -138,6 +142,7 @@ function gameboard (playerOne, playerTwo) {
         }
 
         else if (draw){
+            gameOver = true;
             console.log("It's a draw");
         }
 
@@ -154,6 +159,7 @@ function gameboard (playerOne, playerTwo) {
         checkWinCondition,
         checkDrawCondition,
         printWinCondition,
+        isGameOver,
         rows,
         columns,
     }
@@ -183,6 +189,7 @@ function gameboard (playerOne, playerTwo) {
                 gridContainer.appendChild(cellDiv);
     
                 cellDiv.addEventListener("click", () => {
+                    if (game.isGameOver()) return;
                     let currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
                     
                     if (game.markCell(rIndex, cIndex, currentPlayer.playerSymbol)) {
