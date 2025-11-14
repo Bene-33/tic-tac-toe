@@ -46,11 +46,11 @@ function gameboard (playerOne, playerTwo) {
            
             roundCount++;
 
-            return symbol;
+            return true;
                    
         };
 
-         return  board[row][column].getValue();    
+         return  false;    
     };
 
     function cell() {
@@ -178,9 +178,11 @@ function gameboard (playerOne, playerTwo) {
             cellDiv.addEventListener("click", () => {
                 
                 currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
-                cellDiv.id = currentPlayer === playerOne ? "playerOne" : "playerTwo"; 
-
-                cellDiv.textContent = game.markCell(rIndex, cIndex, currentPlayer.playerSymbol);
+                
+                if (game.markCell(rIndex, cIndex, currentPlayer.playerSymbol)) {
+                    cellDiv.textContent = currentPlayer.playerSymbol;
+                    cellDiv.id = currentPlayer === playerOne ? "playerOne" : "playerTwo"; 
+                };
                 
                 if (game.checkWinCondition(gameBoard) || game.checkDrawCondition(gameBoard)) {
                     return game.printWinCondition(gameBoard);
