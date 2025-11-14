@@ -40,7 +40,7 @@ function gameboard (playerOne, playerTwo) {
             };
         };
 
-        if(availableCell()){
+        if(availableCell()) {
  
             board[row][column].addMarker(symbol);
            
@@ -50,7 +50,7 @@ function gameboard (playerOne, playerTwo) {
                    
         };
 
-        return board[row][column].getValue();    
+         return  board[row][column].getValue();    
     };
 
     function cell() {
@@ -176,13 +176,15 @@ function gameboard (playerOne, playerTwo) {
 
             let currentPlayer = "";
             cellDiv.addEventListener("click", () => {
-                if(game.getRoundCount() % 2 === 0){
-                    currentPlayer = playerOne;
-                } 
-                else if (game.getRoundCount() % 2 !== 0){
-                    currentPlayer = playerTwo;
-                }
-                    cellDiv.textContent = game.markCell(rIndex, cIndex, currentPlayer.playerSymbol);
+                
+                currentPlayer = game.getRoundCount() % 2 === 0 ? playerOne : playerTwo;
+                cellDiv.id = currentPlayer === playerOne ? "playerOne" : "playerTwo"; 
+
+                cellDiv.textContent = game.markCell(rIndex, cIndex, currentPlayer.playerSymbol);
+                
+                if (game.checkWinCondition(gameBoard) || game.checkDrawCondition(gameBoard)) {
+                    return game.printWinCondition(gameBoard);
+                };
             });
         });
     });
