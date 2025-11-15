@@ -138,12 +138,12 @@ function gameboard (playerOne, playerTwo) {
             else if (winner === playerTwo.playerSymbol){
                 winnerName = playerTwo.playerName;
             }
-                console.log(`The winner is ${winnerName}`);
+                alert(`The winner is ${winnerName}`);
         }
 
         else if (draw){
             gameOver = true;
-            console.log("It's a draw");
+            alert("It's a draw");
         }
 
         else {
@@ -173,14 +173,15 @@ function gameboard (playerOne, playerTwo) {
     
     setPlayerNames.addEventListener("click", () => {
         event.preventDefault();
-
+        gridContainer.innerHTML = "";
+        
         playerOne = createPlayer(document.getElementById("playerOne").value, "X");
         playerTwo = createPlayer(document.getElementById("playerTwo").value, "O");
         
+        
         game = gameboard(playerOne, playerTwo);
-
-        // gridContainer.innerHTML = "";
         const gameBoard = game.getBoard();
+
         gameBoard.forEach((row, rIndex) => { 
             row.forEach((column, cIndex) => {
                 const cellDiv = document.createElement("div");
